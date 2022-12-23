@@ -43,7 +43,7 @@ const CreateBook = () => {
   };
 
   return (
-    <div className="sm:flex sm:flex-col sm:justify-center sm:items-center mx-5 mt-10">
+    <div className="sm:flex sm:flex-col sm:justify-center sm:items-center mx-5 mt-10 mb-10">
       <Link
         href="/"
         className="bg-[#FFFFD0] hover:bg-transparent border-2 border-[#FFFFD0] px-3 py-2 text-lg font-semibold rounded-md hover:text-white text-left mr-auto text-[#A555EC]"
