@@ -1,4 +1,5 @@
 import Head from "next/head";
+import AllBooks from "../components/AllBooks";
 
 const Home = () => {
   return (
@@ -9,8 +10,8 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>Hello</h1>
+      <main className="mt-10">
+        <AllBooks />
       </main>
     </>
   );
