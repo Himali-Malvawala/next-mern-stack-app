@@ -1,5 +1,5 @@
 const test = (req, res) => {
-  res.send("book route testing!");
+  res.send("movie route testing!");
 };
 
 export default test;
