@@ -3,30 +3,30 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const BookDetails = () => {
-  const [book, setBook] = useState({});
+const MovieDetails = () => {
+  const [movie, setMovie] = useState({});
   const Router = useRouter();
   const id = Router.query.id;
 
   useEffect(() => {
     axios
-      .get(`/api/books/${id}`)
+      .get(`/api/movies/${id}`)
       .then((res) => {
-        setBook(res.data);
+        setMovie(res.data);
       })
       .catch((err) => {
-        console.log("Error from BookDetails!");
+        console.log("Error from MovieDetails!");
       });
   }, [id]);
 
   const onDelete = (id) => {
     axios
-      .delete(`/api/books/${id}`)
+      .delete(`/api/movies/${id}`)
       .then((res) => {
         Router.push("/");
       })
       .catch((err) =>
-        console.log("Error while Deleting the book [BookDetails]")
+        console.log("Error while Deleting the Movie [MovieDetails]")
       );
   };
 
@@ -36,37 +36,34 @@ const BookDetails = () => {
         href="/"
         className="bg-[#FFFFD0] hover:bg-transparent border-2 border-[#FFFFD0] px-3 py-2 text-lg font-semibold rounded-md hover:text-white text-left mr-auto text-[#A555EC]"
       >
-        Show All Books
+        Show All Movies
       </Link>
       <div className="mt-8 text-white">
         <img
-          src={book.details?.image}
-          alt={book.details?.title}
+          src={movie.details?.image}
+          alt={movie.details?.title}
           className="sm:w-[450px] sm:h-auto rounded-md shadow-xl"
         />
-        <h1 className="text-3xl font-semibold mt-5">{book.details?.title}</h1>
-        <h6 className="text-lg">{book.details?.author}</h6>
-        <p className="font-light mt-3">{book.details?.publisher}</p>
-        <p className="font-light mt-1">ISBN: {book.details?.isbn}</p>
-        <p className="font-light mt-1">{book.details?.published_date}</p>
-        <p className="font-light mt-1">{book.details?.description}</p>
+        <h1 className="text-3xl font-semibold mt-5">{movie.details?.title}</h1>
+        <h6 className="text-lg">{movie.details?.genre}</h6>
+        <p className="font-light mt-1">{movie.details?.watched_date}</p>
       </div>
       <div className="flex justify-between items-center sm:w-[450px] gap-6 mt-8">
         <button
           type="button"
           onClick={() => {
-            onDelete(book.details?._id);
+            onDelete(movie.details?._id);
           }}
           className="border-2 border-[#FFFFD0] text-white py-1 grow rounded-md hover:bg-[#FFFFD0] hover:text-[#A555EC]"
         >
           Delete
         </button>
         <div className="border-2 border-[#FFFFD0] text-white py-1 grow text-center rounded-md hover:bg-[#FFFFD0] hover:text-[#A555EC] cursor-pointer">
-          <Link href={`/edit-book/${book.details?._id}`}>Edit</Link>
+          <Link href={`/edit-movie/${movie.details?._id}`}>Edit</Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default BookDetails;
+export default MovieDetails;
