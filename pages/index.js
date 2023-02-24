@@ -1,17 +1,17 @@
 import Head from "next/head";
-import AllBooks from "../components/AllBooks";
+import AllMovies from "../components/AllMovies";
 
 const Home = () => {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Movies App</title>
         <meta name="description" content="A normal mern-stack with Next.js" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mt-10 mb-10">
-        <AllBooks />
+        <AllMovies />
       </main>
     </>
   );
