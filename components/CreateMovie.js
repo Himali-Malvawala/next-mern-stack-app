@@ -3,42 +3,36 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const CreateBook = () => {
+const CreateMovie = () => {
   const Router = useRouter();
-  const [book, setBook] = useState({
+  const [movie, setMovie] = useState({
     title: "",
-    isbn: "",
-    author: "",
+    genre: "",
     image: "",
-    description: "",
-    published_date: "",
-    publisher: "",
+    watched_date: "",
   });
 
   const onChangeHandler = (event) => {
-    setBook({ ...book, [event.target.name]: event.target.value });
+    setMovie({ ...movie, [event.target.name]: event.target.value });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
     axios
-      .post("/api/books", book)
+      .post("/api/movies", movie)
       .then((res) => {
-        setBook({
+        setMovie({
           title: "",
-          isbn: "",
-          author: "",
+          genre: "",
           image: "",
-          description: "",
-          published_date: "",
-          publisher: "",
+          watched_date: "",
         });
 
         Router.push("/");
       })
       .catch((err) => {
-        console.log("Error in CreateBook!");
+        console.log("Error in CreateMovie!");
       });
   };
 
@@ -48,10 +42,10 @@ const CreateBook = () => {
         href="/"
         className="bg-[#FFFFD0] hover:bg-transparent border-2 border-[#FFFFD0] px-3 py-2 text-lg font-semibold rounded-md hover:text-white text-left mr-auto text-[#A555EC]"
       >
-        Show All Books
+        Show All Movies
       </Link>
-      <h1 className="font-semibold text-5xl text-white mt-5">Add Book</h1>
-      <h6 className="text-lg text-white mt-3">Create new book</h6>
+      <h1 className="font-semibold text-5xl text-white mt-5">Add Movie</h1>
+      <h6 className="text-lg text-white mt-3">Create new Movie</h6>
       <form className="mt-5" onSubmit={onSubmitHandler} noValidate>
         <div className="flex flex-col gap-5">
           <input
@@ -59,25 +53,16 @@ const CreateBook = () => {
             placeholder="Title"
             name="title"
             className="py-2 px-3 rounded-md shadow-2xl mb-5 sm:w-[30rem]"
-            value={book.title}
+            value={movie.title}
             onChange={onChangeHandler}
             required
           />
           <input
             type="text"
-            placeholder="ISBN"
-            name="isbn"
+            placeholder="Genre"
+            name="genre"
             className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.isbn}
-            onChange={onChangeHandler}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Author"
-            name="author"
-            className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.author}
+            value={movie.genre}
             onChange={onChangeHandler}
             required
           />
@@ -86,32 +71,16 @@ const CreateBook = () => {
             placeholder="Image Link"
             name="image"
             className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.image}
+            value={movie.image}
             onChange={onChangeHandler}
             required
           />
           <input
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.description}
-            onChange={onChangeHandler}
-          />
-          <input
             type="date"
-            placeholder="Published Date"
-            name="published_date"
+            placeholder="Watched Date"
+            name="watched_date"
             className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.published_date}
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Publisher"
-            name="publisher"
-            className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-            value={book.publisher}
+            value={movie.watched_date}
             onChange={onChangeHandler}
           />
         </div>
@@ -126,7 +95,7 @@ const CreateBook = () => {
   );
 };
 
-export default CreateBook;
+export default CreateMovie;
 
 //A555EC
 //D09CFA
