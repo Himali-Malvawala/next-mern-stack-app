@@ -3,62 +3,53 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const UpdateBookInfo = () => {
-  const [book, setBook] = useState({
+const UpdateMovieInfo = () => {
+  const [movie, setMovie] = useState({
     title: "",
-    isbn: "",
-    author: "",
+    genre: "",
     image: "",
-    description: "",
-    published_date: "",
-    publisher: "",
+    watched_date: "",
   });
   const Router = useRouter();
   const id = Router.query.id;
 
   useEffect(() => {
     axios
-      .get(`/api/books/${id}`)
+      .get(`/api/movies/${id}`)
       .then((res) => {
-        setBook({
+        setMovie({
           title: res.data.details?.title,
-          isbn: res.data.details?.isbn,
-          author: res.data.details?.author,
+          genre: res.data.details?.genre,
           image: res.data.details?.image,
-          description: res.data.details?.description,
-          published_date: res.data.details?.published_date,
-          publisher: res.data.details?.publisher,
+          watched_date: res.data.details?.watched_date,
         });
       })
       .catch((err) => {
-        console.log("Error from UpdateBookInfo!");
+        console.log("Error from UpdateMovieInfo!");
       });
   }, [id]);
 
   const onChangeHandler = (event) => {
-    setBook({ ...book, [event.target.name]: event.target.value });
+    setMovie({ ...movie, [event.target.name]: event.target.value });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
     const data = {
-      title: book.title,
-      isbn: book.isbn,
-      author: book.author,
-      image: book.image,
-      description: book.description,
-      published_date: book.published_date,
-      publisher: book.publisher,
+      title: movie.title,
+      genre: movie.genre,
+      image: movie.image,
+      watched_date: movie.watched_date,
     };
 
     axios
-      .put(`/api/books/${id}`, data)
+      .put(`/api/movies/${id}`, data)
       .then((res) => {
-        Router.push(`/show-book/${id}`);
+        Router.push(`/show-movie/${id}`);
       })
       .catch((err) => {
-        console.log("Error while Updating the book Info [UpdateBookInfo]!");
+        console.log("Error while Updating the movie Info [UpdateMovieInfo]!");
       });
   };
 
@@ -68,10 +59,10 @@ const UpdateBookInfo = () => {
         href="/"
         className="bg-[#FFFFD0] hover:bg-transparent border-2 border-[#FFFFD0] px-3 py-2 text-lg font-semibold rounded-md hover:text-white text-left mr-auto text-[#A555EC]"
       >
-        Show All Books
+        Show All Movies
       </Link>
       <div>
-        <h1 className="font-semibold text-5xl text-white mt-5">Edit Book</h1>
+        <h1 className="font-semibold text-5xl text-white mt-5">Edit Movie</h1>
         <h5 className="text-lg text-white mt-3 sm:text-center">Update Info</h5>
       </div>
       <div>
@@ -86,35 +77,21 @@ const UpdateBookInfo = () => {
                 placeholder="Title"
                 name="title"
                 className="py-2 px-3 rounded-md shadow-2xl mb-5 sm:w-[30rem]"
-                value={book.title}
+                value={movie.title}
                 onChange={onChangeHandler}
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="isbn" className="mb-1 text-white">
-                ISBN
+              <label htmlFor="genre" className="mb-1 text-white">
+                Genre
               </label>
 
               <input
                 type="text"
-                placeholder="ISBN"
-                name="isbn"
+                placeholder="Genre"
+                name="genre"
                 className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.isbn}
-                onChange={onChangeHandler}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="author" className="mb-1 text-white">
-                Author
-              </label>
-
-              <input
-                type="text"
-                placeholder="Author"
-                name="author"
-                className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.author}
+                value={movie.genre}
                 onChange={onChangeHandler}
               />
             </div>
@@ -128,49 +105,21 @@ const UpdateBookInfo = () => {
                 placeholder="Image Link"
                 name="image"
                 className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.image}
-                onChange={onChangeHandler}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="description" className="mb-1 text-white">
-                Description
-              </label>
-
-              <input
-                type="text"
-                placeholder="Description"
-                name="description"
-                className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.description}
+                value={movie.image}
                 onChange={onChangeHandler}
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="published_date" className="mb-1 text-white">
-                Published Date
+                Watched Date
               </label>
 
               <input
                 type="date"
-                placeholder="Published Date"
-                name="published_date"
+                placeholder="Watched Date"
+                name="watched_date"
                 className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.published_date}
-                onChange={onChangeHandler}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="publisher" className="mb-1 text-white">
-                Publisher
-              </label>
-
-              <input
-                type="text"
-                placeholder="Publisher"
-                name="publisher"
-                className="py-2 px-3 rounded-md shadow-2xl sm:w-[30rem]"
-                value={book.publisher}
+                value={movie.watched_date}
                 onChange={onChangeHandler}
               />
             </div>
@@ -187,4 +136,4 @@ const UpdateBookInfo = () => {
   );
 };
 
-export default UpdateBookInfo;
+export default UpdateMovieInfo;
