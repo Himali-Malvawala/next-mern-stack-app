@@ -1,15 +1,11 @@
 import mongoose from "mongoose";
 
-const BookSchema = new mongoose.Schema({
+const MoviesSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  isbn: {
-    type: String,
-    required: true,
-  },
-  author: {
+  genre: {
     type: String,
     required: true,
   },
@@ -17,21 +13,11 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  watched_date: {
     type: String,
-  },
-  published_date: {
-    type: String,
-  },
-  publisher: {
-    type: String,
-  },
-  updated_date: {
-    type: Date,
-    default: Date.now,
   },
 });
 
-const Book = mongoose.models.Book || mongoose.model("Book", BookSchema);
+const Movie = mongoose.models.Movies || mongoose.model("Movies", MoviesSchema);
 
-export default Book;
+export default Movie;
